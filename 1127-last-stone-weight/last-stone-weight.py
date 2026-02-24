@@ -2,17 +2,18 @@ import heapq
 
 class Solution:
     def lastStoneWeight(self, stones):
-        # превращаем все камни в отрицательные числа для max-heap
+        # Используем max-heap через отрицательные значения
         heap = [-stone for stone in stones]
         heapq.heapify(heap)
-        
+
         while len(heap) > 1:
-            # достаем два самых тяжелых камня
+            # Берем два самых тяжелых камня
             first = -heapq.heappop(heap)
             second = -heapq.heappop(heap)
-            
+
+            # Если веса разные, добавляем разницу обратно
             if first != second:
-                # если камни не равны, разница возвращается в кучу
                 heapq.heappush(heap, -(first - second))
-        
+
+        # Если камень остался, возвращаем его вес
         return -heap[0] if heap else 0
