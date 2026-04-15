@@ -5,9 +5,10 @@ class Solution:
         n = len(points)
         visited = [False] * n
         min_dist = [float('inf')] * n
+
         min_dist[0] = 0
 
-        heap = [(0, 0)]  # (cost, point_index)
+        heap = [(0, 0)]
         result = 0
 
         while heap:
@@ -17,7 +18,7 @@ class Solution:
                 continue
 
             visited[u] = True
-            result += cost
+            result += cost  # добавляем стоимость этого соединения
 
             for v in range(n):
                 if not visited[v]:
@@ -25,6 +26,6 @@ class Solution:
 
                     if dist < min_dist[v]:
                         min_dist[v] = dist
-                        heapq.heappush(heap, (dist, v))
+                        heapq.heappush(heap, (dist, v))  # обновляем лучшее соединение
 
-        return result
+        return result  # итоговая минимальная стоимость
